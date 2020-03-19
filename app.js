@@ -1,6 +1,12 @@
 // express를 사용한 웹 어플리케이션
 var express = require('express');
 var app = express();
+app.locals.pretty = true;
+
+// jade 템플릿 엔진 연결
+app.set('view engine', 'jade');
+// jade 파일은 views 디렉토리에 존재
+app.set('views', './views');
 
 // 정적인 파일을 public 디렉토리에 넣고 다음 코드를 추가
 app.use(express.static('public'));
@@ -46,6 +52,12 @@ app.get('/dynamic', function(req, res){
   </html>`
 
   res.send(output);
+});
+
+// views 디렉토리 안의 jade파일을 렌더링함
+app.get('/template', function(req, res){
+  // jade파일(템플릿)에 값 전달을 위해 render함수 안에 인자를 추가
+  res.render('temp', {title:'Jade', time:Date()});
 });
 
 // port 번호를 이용하여 listen
