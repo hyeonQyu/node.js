@@ -60,6 +60,23 @@ app.get('/template', function(req, res){
   res.render('temp', {title:'Jade', time:Date()});
 });
 
+// 쿼리스트링을 이용한 response
+app.get('/topic', function(req, res){
+  var topics = [
+    'Javascript is...',
+    'Nodejs is...',
+    'Express is...'
+  ];
+  // id 번호에 따른 링크 생성
+  var output = `
+    <a href="/topic?id=0">Javascript</a><br>
+    <a href="/topic?id=1">Nodejs</a><br>
+    <a href="/topic?id=2">Express</a><br><br>
+    ${topics[req.query.id]}
+  `
+  res.send(output);
+});
+
 // port 번호를 이용하여 listen
 app.listen(3000, function(){
   console.log('Connected 3000 port');
