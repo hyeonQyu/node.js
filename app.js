@@ -77,6 +77,26 @@ app.get('/topic', function(req, res){
   res.send(output);
 });
 
+// semantic url을 사용한 response
+app.get('/topic2/:id', function(req, res){
+  var topics = [
+    'Javascript is...',
+    'Nodejs is...',
+    'Express is...'
+  ];
+  // id 번호에 따른 링크 생성
+  var output = `
+    <a href="/topic2/0">Javascript</a><br>
+    <a href="/topic2/1">Nodejs</a><br>
+    <a href="/topic2/2">Express</a><br><br>
+    ${topics[req.params.id]}
+  `
+  res.send(output);
+});
+app.get('/topic2/:id/:mode', function(req, res){
+  res.send(req.params.id + ', ' + req.params.mode);
+});
+
 // port 번호를 이용하여 listen
 app.listen(3000, function(){
   console.log('Connected 3000 port');
